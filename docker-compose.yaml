@@ -4,3 +4,8 @@ services:
     image: nginx:latest
     ports:
       - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./web:/etc/nginx/html
+      - ./nginx:/etc/nginx/conf.d
+      - ./certs:/etc/nginx/certs
