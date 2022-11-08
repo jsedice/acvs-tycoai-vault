@@ -6,3 +6,11 @@ services:
     environment:
       VAULT_ADDR: "http://0.0.0.0:8200"
       VAULT_DEV_ROOT_TOKEN_ID: "root"
+  web:
+    image: nginx:latest
+    ports:
+      - "8443:443"
+    volumes:
+      - ./nginx/web:/etc/nginx/html
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
