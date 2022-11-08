@@ -8,10 +8,11 @@ Install [Docker and docker-compose](https://docs.docker.com/compose/install/)
 
 Install a vault cli tool:
 ```
-apt-get install -y software-properties-common curl gnupg2
-curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-apt-get update && apt-get install -y vault
+sudo apt-get install -y software-properties-common curl gnupg2
+sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update 
+sudo apt-get install -y vault
 ```
 
 # Step 1: Spin up the vault container
@@ -35,5 +36,9 @@ vault write -format=json -f auth/approle/role/nginx/secret-id | jq -r '.data.sec
 export VAULT_ADDR=http://localhost:8200
 vault write auth/approle/login role_id=$(sed -n '1p' role_secret_id) secret_id=$(sed -n '2p' role_secret_id)
 vault login
+```
+
+# Step 4: Read secrets from vault
+```
 vault kv get kv/nginx
 ```
